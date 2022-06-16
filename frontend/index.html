@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>App</title>
+        <link rel="stylesheet" href="./style.css">
+
+        <script>
+            function onSubmit() {
+                var name = document.getElementById("name").value;
+                var age = document.getElementById("age").value;
+
+                let data = {
+                    name,
+                    age
+                }
+                let request = new XMLHttpRequest()
+                request.open('GET', 'http://localhost:8080');
+                request.setRequestHeader("Access-Control-Allow-Origin", "*")
+                request.send(data);
+                request.onload = () => {
+                    console.log("request.response =====", JSON.parse(request.response).msg);
+                    
+                }
+            }
+        </script>
+    </head>
+    <body class="main-container">
+        <div class="my-app">
+            <h1>Application</h1>
+            <div class="first-row">
+                <span">Name</span>
+                <input id="name" type="text" name="name" />
+            </div>
+            <div>
+                <span>Age</span>
+                <input id="age" type="number" name="age" />
+            </div>
+            <div>
+                <input onclick="onSubmit()" class="submit" type="button" name="name" value="submit" />
+            </div>
+        </div>
+    </body>
+</html>
